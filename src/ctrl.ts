@@ -1,4 +1,4 @@
-import { createEffect, createSignal, createMemo, mapArray } from 'solid-js'
+import { untrack, createEffect, createSignal, createMemo, mapArray } from 'solid-js'
 import { read, write, owrite } from 'solid-play'
 
 export class _Chessreplay23 {
@@ -17,10 +17,11 @@ export class _Chessreplay23 {
 
     createEffect(() => {
       let path = read(this.a_moves._hover_path)
-      on_hover(path)
+      untrack(() => on_hover(path))
     })
 
     
+    /*
     this.moves = [
       'd4 d4',
       'd4d5 d5',
@@ -48,6 +49,7 @@ export class _Chessreplay23 {
       'd4d5f4c5e3b6c3e6f3c4b3b5b1d7 Qd7',
       'd4d5f4c5e3b6c3e6f3c4b3b5b1d7e5 Ne5',
     ]
+   */
 
   }
 }

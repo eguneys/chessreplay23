@@ -7,6 +7,7 @@ export default defineConfig({
     solidPlugin(),
   ],
   build: {
+    sourcemap: 'inline',
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'Chessreplay23',

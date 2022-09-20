@@ -6,7 +6,7 @@ export default function(props) {
   let ctrl = new _Chessreplay23(_ => props.on_hover?.(_))
 
   createEffect(() => {
-    ctrl.fen = props.fen
+    ctrl.moves = props.moves
     })
 
   const on_hover = (path: string) => {

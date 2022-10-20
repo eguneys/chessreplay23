@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "exports": "./dist/chessreplay23.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite --port=3000",
-    "build": "vite build",
+    "build": "vite build && tsc --emitDeclarationOnly",
     "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit --watch"
   },
   "devDependencies": {
     "babel-preset-solid": "^1.5.5",

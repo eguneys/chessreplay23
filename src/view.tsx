@@ -1,7 +1,8 @@
+import { Component, For, Show } from 'solid-js'
 import { createEffect } from 'solid-js'
-import { _Chessreplay23 } from './ctrl'
+import { _Chessreplay23, Path, Move as _Move, MainChildrenAndRest as _MainChildrenAndRest, Nodes } from './ctrl'
 
-export default function(props) {
+export default function(props: { moves: Array<string>, on_hover?: (_: Path) => void }) {
 
   let ctrl = new _Chessreplay23(_ => props.on_hover?.(_))
 
@@ -17,7 +18,7 @@ export default function(props) {
     <div class="chessreplay">
 
      <div class="moves">
-       <For each={ctrl.tree}>{ node =>
+       <For each={ctrl.tree}>{ (node: Nodes) =>
          <>
            <Move on_hover={on_hover} {...node}/>
            <MainChildrenAndRest on_hover={on_hover} mcr={node.main_children_and_rest}/>
@@ -30,7 +31,7 @@ export default function(props) {
 
 
 
-const MainChildrenAndRest = props => {
+const MainChildrenAndRest: Component<{ mcr?: _MainChildrenAndRest, on_hover: (_: string) => void }> = props => {
   if (!props.mcr) {
     return (<></>)
   }
@@ -57,7 +58,7 @@ const MainChildrenAndRest = props => {
      </>)
 }
 
-const Move = props => {
+const Move: Component<Nodes & { on_hover: (path: string) => void }> = props => {
   return (<><div class={['move', props.hi?'hi':''].join(' ')} onMouseOver={_ => props.on_hover(props.a_move.path)}>
       <Show when={props.show_index}>
         <div class="index">{props.index}</div>

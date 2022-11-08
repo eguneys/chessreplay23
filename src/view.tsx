@@ -59,7 +59,7 @@ const MainChildrenAndRest: Component<{ mcr?: _MainChildrenAndRest, on_hover: (_:
 }
 
 const Move: Component<Nodes & { on_hover: (path: string) => void }> = props => {
-  return (<><div class={['move', props.hi?'hi':''].join(' ')} onMouseOver={_ => props.on_hover(props.a_move.path)}>
+  return (<><div class={['move', props.hi?'hi':(props.hi_sub?'hi_sub':'')].join(' ')} onMouseOver={_ => props.on_hover(props.a_move.path)}>
       <Show when={props.show_index}>
         <div class="index">{props.index}</div>
       </Show>

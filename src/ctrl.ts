@@ -7,6 +7,7 @@ export type Path = string
 
 export type MainChildrenAndRest = [Nodes, Array<Nodes>]
 export type Nodes = {
+  hi_sub: boolean,
   hi: boolean,
   a_move: Move,
   index: string,
@@ -47,7 +48,8 @@ export type Replay = _Chessreplay23
 function node_hi(node: Nodes, path: string) {
 
   if (path.slice(0, node.a_move.path.length) === node.a_move.path) {
-    node.hi = true
+    node.hi_sub = true
+    node.hi = path.length === node.a_move.path.length
   }
   if (node.main_children_and_rest) {
     node_hi(node.main_children_and_rest[0], path)
@@ -57,6 +59,7 @@ function node_hi(node: Nodes, path: string) {
 
 function node_off(node: Nodes) {
   node.hi = false
+  node.hi_sub = false
   if (node.main_children_and_rest) {
     node_off(node.main_children_and_rest[0])
     node.main_children_and_rest[1].forEach(_ => node_off(_))
@@ -125,8 +128,15 @@ export class Moves {
           let show_index = is_branch || !i_continue
 
           let _hi = createSignal(false)
+          let _hi_sub = createSignal(false)
 
           return {
+            set hi_sub(v: boolean) {
+              owrite(_hi_sub, v)
+            },
+            get hi_sub() {
+              return read(_hi_sub)
+            },
             set hi(v: boolean) {
               owrite(_hi, v)
             },
@@ -144,26 +154,6 @@ export class Moves {
 
     let m_tree: Memo<Array<Nodes>> = make_nodes('')
     this.m_tree = m_tree
-
-    function node_hi(node: Nodes, path: string) {
-
-      if (path.slice(0, node.a_move.path.length) === node.a_move.path) {
-        node.hi = true
-      }
-      if (node.main_children_and_rest) {
-        node_hi(node.main_children_and_rest[0], path)
-        node.main_children_and_rest[1].forEach(_ => node_hi(_, path))
-      }
-    }
-
-    function node_off(node: Nodes) {
-      node.hi = false
-      if (node.main_children_and_rest) {
-        node_off(node.main_children_and_rest[0])
-        node.main_children_and_rest[1].forEach(_ => node_off(_))
-      }
-    }
-
   }
 
 }

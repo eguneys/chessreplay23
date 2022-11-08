@@ -1,5 +1,5 @@
 import { Signal } from 'solid-js'
-import { untrack, createEffect, createSignal, createMemo, mapArray } from 'solid-js'
+import { on, untrack, createEffect, createSignal, createMemo, mapArray } from 'solid-js'
 import { Memo, read, write, owrite } from 'solid-play'
 
 
@@ -7,8 +7,7 @@ export type Path = string
 
 export type MainChildrenAndRest = [Nodes, Array<Nodes>]
 export type Nodes = {
-  hi_sub: boolean,
-  hi: boolean,
+  klass: string,
   a_move: Move,
   index: string,
   show_index: boolean,
@@ -29,22 +28,14 @@ export class _Chessreplay23 {
 
   a_moves: Moves
 
-  constructor(on_hover: (_: Path) => void) {
-
+  constructor() {
     this.a_moves = Moves.make(this)
-
-    createEffect(() => {
-      const path = read(this.a_moves._hover_path)
-      if (path) {
-        untrack(() => on_hover(path))
-      }
-    })
-
   }
 }
 
 export type Replay = _Chessreplay23
 
+/*
 function node_hi(node: Nodes, path: string) {
 
   if (path.slice(0, node.a_move.path.length) === node.a_move.path) {
@@ -65,22 +56,21 @@ function node_off(node: Nodes) {
     node.main_children_and_rest[1].forEach(_ => node_off(_))
   }
 }
+*/
 
 
 export class Moves {
 
   static make = (replay: Replay) => new Moves(replay)
 
-  hover_path(path: string) {
-    this.m_tree().forEach(_ => node_off(_))
-    this.m_tree().forEach(_ => node_hi(_, path))
+  set on_path(path: string | undefined) {
+    owrite(this._on_path, path)
+  }
 
+  set hover_path(path: string | undefined) {
     owrite(this._hover_path, _ => path)
   }
 
-  hover_off() {
-    this.m_tree().forEach(_ => node_off(_))
-  }
   get tree() {
     return this.m_tree()
   }
@@ -92,12 +82,16 @@ export class Moves {
   m_tree: Memo<Array<Nodes>>
   _moves: Signal<Array<string>>
   _hover_path: Signal<string | undefined>
+  _on_path: Signal<string | undefined>
 
 
   constructor(readonly replay: Replay) {
   
     let _hover_path: Signal<string | undefined> = createSignal(undefined, { equals: false })
     this._hover_path = _hover_path
+
+    let _on_path: Signal<string | undefined> = createSignal(undefined, { equals: false })
+    this._on_path = _on_path
 
     let _moves: Signal<Array<string>> = createSignal([])
     this._moves = _moves
@@ -127,21 +121,34 @@ export class Moves {
 
           let show_index = is_branch || !i_continue
 
-          let _hi = createSignal(false)
-          let _hi_sub = createSignal(false)
+
+          let m_on_hi = createMemo(() =>
+            read(_on_path) === a_move.path
+          )
+
+          let m_on_hi_sub = createMemo(() => 
+                                    read(_on_path)?.slice(0, a_move.path.length) === a_move.path)
+
+
+
+          let m_hi = createMemo(() =>
+            read(_hover_path) === a_move.path
+          )
+
+          let m_hi_sub = createMemo(() => 
+                                    read(_hover_path)?.slice(0, a_move.path.length) === a_move.path)
+
+          let m_klass = createMemo(() => [
+            'move',
+            m_on_hi() ? 'on_hi' : '',
+            m_on_hi_sub() ? 'on_hi_sub' : '',
+            m_hi() ? 'hi':'',
+            m_hi_sub() ? 'hi_sub': ''
+          ].join(' '))
 
           return {
-            set hi_sub(v: boolean) {
-              owrite(_hi_sub, v)
-            },
-            get hi_sub() {
-              return read(_hi_sub)
-            },
-            set hi(v: boolean) {
-              owrite(_hi, v)
-            },
-            get hi() {
-              return read(_hi)
+            get klass() {
+              return m_klass()
             },
             a_move,
             index,

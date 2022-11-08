@@ -37,7 +37,7 @@ const App = () => {
     ]
 
   return (<>
-      <Chessreplay23 moves={moves}/>
+      <Chessreplay23 on_path={""} moves={moves}/>
       </>)
 }
 

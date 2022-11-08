@@ -2,13 +2,17 @@ import { Component, For, Show } from 'solid-js'
 import { createEffect } from 'solid-js'
 import { _Chessreplay23, Path, Move as _Move, MainChildrenAndRest as _MainChildrenAndRest, Nodes } from './ctrl'
 
-export default function(props: { moves: Array<string>, on_click?: (_: Path) => void }) {
+export default function(props: { on_path: string, moves: Array<string>, on_click?: (_: Path) => void }) {
 
   let ctrl = new _Chessreplay23()
 
   createEffect(() => {
     ctrl.moves = props.moves
     })
+
+  createEffect(() => {
+      ctrl.on_path = props.on_path
+      })
 
   const on_hover = (path: string | undefined) => {
     ctrl.a_moves.hover_path = path

@@ -25,6 +25,11 @@ export class _Chessreplay23 {
     this.a_moves.moves = moves
   }
 
+  set on_path(_: string | undefined) {
+
+    this.a_moves.on_path = _
+  }
+
 
   a_moves: Moves
 
@@ -34,30 +39,6 @@ export class _Chessreplay23 {
 }
 
 export type Replay = _Chessreplay23
-
-/*
-function node_hi(node: Nodes, path: string) {
-
-  if (path.slice(0, node.a_move.path.length) === node.a_move.path) {
-    node.hi_sub = true
-    node.hi = path.length === node.a_move.path.length
-  }
-  if (node.main_children_and_rest) {
-    node_hi(node.main_children_and_rest[0], path)
-    node.main_children_and_rest[1].forEach(_ => node_hi(_, path))
-  }
-}
-
-function node_off(node: Nodes) {
-  node.hi = false
-  node.hi_sub = false
-  if (node.main_children_and_rest) {
-    node_off(node.main_children_and_rest[0])
-    node.main_children_and_rest[1].forEach(_ => node_off(_))
-  }
-}
-*/
-
 
 export class Moves {
 

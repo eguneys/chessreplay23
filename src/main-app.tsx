@@ -25,7 +25,7 @@ const App = () => {
     'd4d5f4c5e3b6c3e6f3e7a5 a5 { What s up ok ok ok ook }',
     'd4d5f4c5e3b6c3e6f3e7a5d8 Qd8',
     'd4d5f4c5e3b6c3e6f3c4b3 b3',
-    'd4d5f4c5e3b6c3e6f3c4b3b5 b5',
+    'd4d5f4c5e3b6c3e6f3c4b3b5 b5 {__red__ redyes}',
     'd4d5f4c5e3b6c3e6f3c4b3b5b1 Rb1',
     'd4d5f4c5e3b6c3e6f3c4b3b5b1a5 Qa5',
     'd4d5f4c5e3b6c3e6f3c4b3b5b1a5b7 Rxb7',

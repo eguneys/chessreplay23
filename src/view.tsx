@@ -68,7 +68,7 @@ const MainChildrenAndRest: Component<{ mcr?: _MainChildrenAndRest, on_click: (pa
 }
 
 const Move: Component<Nodes & { on_click: (path: string) => void, on_hover: (path: string | undefined) => void }> = props => {
-  return (<><div class={props.klass} 
+  return (<><div class={props.klass + props.a_move.klass} 
       onClick={_ => props.on_click(props.a_move.path)}
       onMouseLeave={_ => props.on_hover(undefined)} 
       onMouseOver={_ => props.on_hover(props.a_move.path)}>
@@ -77,6 +77,6 @@ const Move: Component<Nodes & { on_click: (path: string) => void, on_hover: (pat
       </Show>
       {props.a_move.move}
       </div>
-      <div class="comment">{props.a_move.comments}</div>
+      <div class={['comment', props.a_move.klass].join(' ')}>{props.a_move.comments}</div>
       </>)
 }

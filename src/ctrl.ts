@@ -157,18 +157,27 @@ export class Move {
   base: string
   move: string
   comments: string | undefined
+  klass: string
 
   constructor(_path: string) {
     let _comments = _path.match(/([^ ]*) ([^ ]*) \{([^\}]*)\}/)
     let comments,
     path,
-    move
+    move,
+    klass
+
     if (_comments) {
       path = _comments[1]
       move = _comments[2]
-      comments = _comments[3]
+
+      let [_, meta, __comments] = _comments[3].match(/^(__[^\_]*__)?(.*)$/)!
+
+      comments = __comments
+      klass = meta?.substring(2, meta.length - 2) || ''
+      console.log(meta, __comments)
     } else {
       [path, move] = _path.split(' ')
+      klass = ''
     }
 
     let base = path.length === 2 ? '' : path.slice(0, -2)
@@ -180,5 +189,6 @@ export class Move {
     this.base = base
     this.move = move
     this.comments = comments
+    this.klass = klass
   }
 }

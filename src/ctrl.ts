@@ -174,7 +174,6 @@ export class Move {
 
       comments = __comments
       klass = meta?.substring(2, meta.length - 2) || ''
-      console.log(meta, __comments)
     } else {
       [path, move] = _path.split(' ')
       klass = ''

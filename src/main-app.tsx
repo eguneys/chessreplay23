@@ -1,5 +1,5 @@
 import { createSignal, createMemo } from 'solid-js'
-import Chessreplay23 from './view'
+import Chessreplay23 from './view2'
 
 const App = () => {
 

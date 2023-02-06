@@ -8,12 +8,10 @@ specifiers:
   vite: ^3.1.0
   vite-plugin-solid: ^2.3.3
 
-dependencies:
-  solid-js: 1.6.10
-  solid-play: link:../solid-play
-
 devDependencies:
   babel-preset-solid: 1.6.10
+  solid-js: 1.6.10
+  solid-play: link:../solid-play
   typescript: 4.9.5
   vite: 3.2.5
   vite-plugin-solid: 2.5.0_solid-js@1.6.10+vite@3.2.5
@@ -490,6 +488,7 @@ packages:
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
+    dev: true
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -862,6 +861,7 @@ packages:
     resolution: {integrity: sha512-Sf0e6PQCEFkFtbPq0L+93Ua81YQOefBEbvDJ0YXT92b6Lzw0k7UvzSd2l1BbYM+yzE3UmepU1tyMDc/3nIByjA==}
     dependencies:
       csstype: 3.1.1
+    dev: true
 
   /solid-refresh/0.4.3_solid-js@1.6.10:
     resolution: {integrity: sha512-7+4/gYsVi0BlM4PzT1PU1TB5nW3Hv8FWuB+Kw/ofWui7KQkWBf+dVZOrReQYHEmLCzytHUa2JysUXgzVALJmSw==}

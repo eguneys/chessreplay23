@@ -4,7 +4,7 @@ import solidPlugin from 'vite-plugin-solid'
 
 export default defineConfig({
   plugins: [
-    solidPlugin(),
+    solidPlugin({hot: false }),
   ],
   build: {
     sourcemap: 'inline',
@@ -14,7 +14,7 @@ export default defineConfig({
       fileName: 'chessreplay23'
     },
     rollupOptions: {
-      external: ['solid-js', 'solid-play']
+      external: ['solid-js/web', 'solid-js', 'solid-play']
     }
   } 
 })

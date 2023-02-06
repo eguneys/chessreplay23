@@ -6,9 +6,7 @@ export default function(props: { on_path: string, moves: Array<string>, on_click
 
   let ctrl = new _Chessreplay23()
 
-console.log('here')
   createEffect(() => {
-console.log(props.moves)
     ctrl.moves = props.moves
     })
 

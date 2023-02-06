@@ -13,12 +13,14 @@
   },
   "devDependencies": {
     "babel-preset-solid": "^1.5.5",
+    "solid-js": "^1.6.10",
+    "solid-play": "link:../solid-play",
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
     "vite-plugin-solid": "^2.3.3"
   },
-  "dependencies": {
-    "solid-js": "^1.6.10",
-    "solid-play": "link:../solid-play"
+  "peerDependencies": {
+    "solid-play": "link:../solid-play",
+    "solid-js": "^1.6.10"
   }
 }
